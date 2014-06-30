@@ -1,0 +1,24 @@
+Multiple%%%Who's buried in Grant's tomb?%%%no one%%%@@@Grant @@@Jefferson @@@no one@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Multiple%%%Grant is ________ in Grant's tomb.%%%entombed %%%@@@buried @@@entombed @@@living@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###True_false%%%Grant is buried in Grant's tomb.%%%false%%%false%%%!!!%%%!!!###Short_Answer%%%Who's buried in Grant's tomb?%%%no one@@@nobody@@@%%%no one@@@nobody@@@%%%!!!@@@!!!@@@%%%!!!@@@!!!@@@###Numeric%%%When was Ulysses S. Grant born?%%%1822@@@1@@@!!!%%%1822@@@1@@@!!!%%%!!!%%%!!!###Multiple%%%Who's buried in Grant's tomb?%%%no one%%%@@@Grant @@@Jefferson @@@no one@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Multiple%%%Grant is ________ in Grant's tomb.%%%entombed %%%@@@buried @@@entombed @@@living@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Multiple%%%The American holiday of Thanksgiving is celebrated on the ________ Thursday of November.%%%fourth
+%%%
+    @@@second
+    @@@third
+    @@@fourth
+@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Multiple%%%Japanese characters originally came from what country? %%%China
+    %%%
+    @@@India
+    @@@China
+    @@@Korea
+    @@@Egypt@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@!!!@@@###Short_Answer%%%Two plus two equals ________.%%%four@@@4@@@%%%four@@@4@@@%%%!!!@@@!!!@@@%%%!!!@@@!!!@@@###True_false%%%Grant is buried in Grant's tomb.%%%false%%%false%%%!!!%%%!!!###True_false%%%The sun rises in the east.%%%true%%%true%%%!!!%%%!!!###Matching%%%Match the following countries with their corresponding capitals. %%%Canada $$Italy  $$Japan  $$India  $$@@@ Ottawa
+    $$ Rome
+    $$ Tokyo
+    $$ New Delhi
+    $$%%%Canada $$Italy  $$Japan  $$India  $$@@@ Ottawa
+    $$ Rome
+    $$ Tokyo
+    $$ New Delhi
+    $$%%%!!!%%%!!!###Numeric%%%When was Ulysses S. Grant born? %%%1822@@@!!!@@@!!!%%%1822@@@!!!@@@!!!%%%!!!%%%!!!###Numeric%%%What is the value of pi (to 3 decimal places)? ________.%%%3.1415@@@0.0005@@@!!!%%%3.1415@@@0.0005@@@!!!%%%!!!%%%!!!###Numeric%%%When was Ulysses S. Grant born? %%%1822$$1822$$@@@0$$2$$@@@!!!$$!!!$$%%%1822$$1822$$@@@0$$2$$@@@!!!$$!!!$$%%%!!!@@@!!!@@@%%%!!!@@@50@@@###Numeric%%%What's 2 plus 2? %%%4@@@!!!@@@!!!%%%4@@@!!!@@@!!!%%%!!!%%%!!!###Short_Answer%%%Japanese characters originally
+came from what country? %%%China@@@%%%China@@@%%%!!!@@@%%%!!!@@@###Multiple%%%The American holiday of Thanksgiving is 
+celebrated on the ________ Thursday of November.%%%fourth%%%@@@second @@@third @@@fourth@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Multiple%%%What's the answer to this multiple-choice question?%%%right answer%%%
+@@@wrong answer@@@another wrong answer@@@right answer@@@%%%!!!@@@feedback comment on the wrong answer
+@@@feedback comment on this wrong answer
+@@@Very good!@@@%%%!!!@@@!!!@@@!!!@@@!!!@@@###Short_Answer%%%Who's buried in Grant's tomb?%%%no one@@@nobody@@@%%%no one@@@nobody@@@%%%excellent answer!@@@excellent answer!@@@%%%!!!@@@!!!@@@###

@@ -1,0 +1,98 @@
+//  EXAMPLE QUESTIONS for the GIFT import filter
+//  by Paul Tsuchido Shew, January 2004.
+
+//-----------------------------------------//
+//        EXAMPLES FROM DESCRIPTION
+//-----------------------------------------//
+
+Who's buried in Grant's tomb?{~Grant ~Jefferson =no one}
+
+Grant is {~buried =entombed ~living} in Grant's tomb.
+
+Grant is buried in Grant's tomb.{FALSE}
+
+Who's buried in Grant's tomb?{=no one =nobody}
+
+When was Ulysses S. Grant born?{#1822:1}
+
+
+//-----------------------------------------//
+//       EXAMPLES FROM DOCUMENTATION
+//-----------------------------------------//
+
+// ===Multiple Choice===
+
+Who's buried in Grant's tomb?{~Grant ~Jefferson =no one}
+
+Grant is {~buried =entombed ~living} in Grant's tomb.
+
+The American holiday of Thanksgiving is celebrated on the {
+    ~second
+    ~third
+    =fourth
+} Thursday of November.
+
+Japanese characters originally came from what country? {
+    ~India
+    =China
+    ~Korea
+    ~Egypt}
+
+// ===Short Answer===
+
+
+
+Two plus two equals {=four =4}.
+
+// ===True-False===
+
+Grant is buried in Grant's tomb.{F}
+
+The sun rises in the east.{T}
+
+// ===Numerical===
+
+Match the following countries with their corresponding capitals. {
+    =Canada -> Ottawa
+    =Italy  -> Rome
+    =Japan  -> Tokyo
+    =India  -> New Delhi
+    }
+
+// ===Numerical===
+
+When was Ulysses S. Grant born? {#1822}
+
+What is the value of pi (to 3 decimal places)? {#3.1415:0.0005}.
+
+When was Ulysses S. Grant born? {#
+    =1822:0
+    =%50%1822:2}
+
+// OPTIONS 
+
+// ===Line Comments===
+
+// Subheading: Numerical questions below
+What's 2 plus 2? {#4}
+
+
+// ===Question Name===
+
+::Kanji Origins::Japanese characters originally
+came from what country? {=China}
+
+::Thanksgiving Date::The American holiday of Thanksgiving is 
+celebrated on the {~second ~third =fourth} Thursday of November.
+
+// ===Feedback===
+
+What's the answer to this multiple-choice question?{
+~wrong answer#feedback comment on the wrong answer
+~another wrong answer#feedback comment on this wrong answer
+=right answer#Very good!}
+
+Who's buried in Grant's tomb?{
+=no one#excellent answer!
+=nobody#excellent answer!}
+
