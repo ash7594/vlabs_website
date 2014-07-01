@@ -12,9 +12,9 @@ $cls = $_GET['cls'];
 $cls = mysql_real_escape_string($cls);
 
 //build query
-$jsonStr2 = "[{ 'checksum' : '$checksum',
-'class_no' : '$cls',
-'subject' : [";
+$jsonStr2 = "[{ \"checksum\" : \"$checksum\",
+\"class_no\" : \"$cls\",
+\"subject\" : [";
 $subArr = array("physics","chemistry","biology","mathematics");
 $display_string = "";
 for ($i = 0; $i <= 3; $i++) {
@@ -22,26 +22,32 @@ for ($i = 0; $i <= 3; $i++) {
 	$qry_result4 = mysql_query($query4) or die(mysql_error());
 	$jsonStr2.="
 	{
-	'subject_name' : '$subArr[$i]',
-	'exps' : [";
+	\"subject_name\" : \"$subArr[$i]\",
+	\"exps\" : [";
+	$count = 0; $count1 = mysql_num_rows($qry_result4);
 	while($row4 = mysql_fetch_array($qry_result4))
 	{			
 		$jsonStr2.="
 		{
-		'name' : '$row4[name]',
-		'exp_no' : '$row4[exp_no]',
-		'description' : '$row4[description]',
-		'thumb' : '$row4[icon]',
-		},";
+		\"name\" : \"$row4[name]\",
+		\"exp_no\" : \"$row4[exp_no]\",
+		\"description\" : \"$row4[description]\",
+		\"thumb\" : \"$row4[icon]\"
+		}";
+		
+		if($count!=$count1-1) $jsonStr2 .= ",";
+		
+		$count++;
 	}
 						
 	$jsonStr2.="
-	]
-	},";
+		]
+	}";
+	if($i!=3) $jsonStr2 .= ",";
 }
 $jsonStr2.="
 ]
-},]";
+}]";
 
 $my_file2=fopen("file2.json",'w');
 fwrite($my_file2,$jsonStr2);
