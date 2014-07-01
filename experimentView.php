@@ -184,6 +184,12 @@
 				each_ques[i][j] = each_ques[i][j].trim();
 				if(each_ques[i][j].contains("@@@")){
 					each_ques[i][j] = each_ques[i][j].split("@@@");
+					for(var k=0;k<each_ques[i][j].length;k++) {
+						each_ques[i][j][k] = each_ques[i][j][k].trim();
+						if(each_ques[i][j][k].contains("$$")){
+							each_ques[i][j][k] = each_ques[i][j][k].split("$$");
+						}
+					}
 				}
 			}
 		}
@@ -300,8 +306,34 @@
 							temp_str += temp_str2 + "@@@";
 						}
 					}
+					
+					if(temp_str == ""){
+						not_answered++;
+						code_str = not_answer_code;
+						fdbk = "---";
+					}else{
+						/*if(each_ques[i][2] == temp_str){
+						
+							qns_points = 100.0;
+							correct_qns++;
+							grand_total = grand_total + 100;
+							code_str = correct_code;						
+						}
+						else{						
+							qns_points = 0.0;
+							wrong_qns++;
+							code_str = wrong_code;
+						}
+						
+						if(each_ques[i][4][j+1] == "!!!"){
+							fdbk = "#No fead back is provided."
+						}else{
+							fdbk = each_ques[i][4][j+1];
+						}*/
+					}					
+					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; <small>Correct</small></th><th style='text-align:right; padding-right:2%;'> 100.0 pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td style='color:green;'>True Ans </td><td style='text-align:right; padding-right:2%;'>Your Ans </td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Matching":
@@ -323,18 +355,89 @@
 				case "Numeric":
 				
 					var temp_str = "";
+					var crt_ans = "";
 					temp_str = document.getElementById("question"+(i+1)).value;
-					
 					if(temp_str == ""){
 						not_answered++;
 						code_str = not_answer_code;
 						fdbk = "---";
 					}else{
+						var temp = 0;
+						temp_str = parseInt(temp_str);
+						for(var m=0; m<each_ques[i][2][1].length-1;m++){
+							if(each_ques[i][2][1][m] != "!!!"){
+								//alert(each_ques[i][2][0][m]+" "+each_ques[i][2][1][m]);
+								if(temp_str >= (parseInt(each_ques[i][2][0][m])-parseInt(each_ques[i][2][1][m])) && temp_str <= (parseInt(each_ques[i][2][0][m])+parseInt(each_ques[i][2][1][m]))){
+									temp=1;
+									break;
+								}else{
+									temp=0;
+								}
+							}
+							else if(each_ques[i][2][2][m] != "!!!"){
+								alert("done_elseif");
+								if(temp_str >= parseInt(each_ques[i][2][0][m]) && temp_str <= parseInt(each_ques[i][2][2][m])){
+									temp=1;
+									break;
+								}else{
+									temp=0;
+								}
+							}
+							else{
+								alert("done_else");
+								if(each_ques[i][2][0][m] == temp_str){
+									temp = 1;
+									break;
+								}else{
+									temp=0;
+								}
+							}
+						}
+						if(temp == 1){								
+							correct_qns++;
+							if(each_ques[i][5][m] == "!!!"){
+								grand_total = grand_total + 100;
+								qns_points = 100.0;
+							}
+							else{
+								grand_total = grand_total + parseInt(each_ques[i][5][m]);
+								qns_points = parseInt(each_ques[i][5][m]);
+							}
+							code_str = correct_code;								
+						}else{
+							qns_points = 0.0;
+							wrong_qns++;
+							code_str = wrong_code;
+						}
+						
+						for(m=0;j<each_ques[i][2][0].length-1;m++){
+							if(temp_str >= (each_ques[i][2][0][m]-each_ques[i][2][1][m]) && temp_str <= (each_ques[i][2][0][m]+each_ques[i][2][1][m])){
+								break;
+							}else if(temp_str >= each_ques[i][2][0][m] && temp_str <= each_ques[i][2][2][m]){
+								break;
+							}
+						}
+						if(each_ques[i][4][m] == "!!!"){
+							fdbk = "#No fead back is provided."
+						}else{
+							fdbk = each_ques[i][4][m];
+						}
+					}
+					for(var m=0; m<each_ques[i][2][1].length-1;m++){
+						if(each_ques[i][2][1][m] != "!!!"){
+							crt_ans += each_ques[i][2][0][m] + "  +/- "+ each_ques[i][2][1][m]+", ";
+						}else if(each_ques[i][2][2][m] != "!!!"){
+							crt_ans += each_ques[i][2][0][m] + "  to "+ each_ques[i][2][2][m]+", ";
+						}else{
+							crt_ans += each_ques[i][2][0][m]+", ";
+						}
+					}
+					for(var m=0; m<each_ques[i][2][1].length-1;m++){
 						
 					}
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+crt_ans+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Missing_word":

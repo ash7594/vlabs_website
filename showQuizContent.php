@@ -253,11 +253,12 @@ for($i=0;$i<count($qusts);$i++){
 			}
 			break;
 		case "Multiple_many":
+				$correct_Options = "";
 				$tempAllOptions="";
 				$tempweight="";
 				$tempfeedback="";
 				$temp = explode("~",$answers[$i]);
-				for($j=0;$j<count($temp);$j++){
+				for($j=1;$j<count($temp);$j++){
 					$fdbk="";
 					if (strpos($temp[$j],"%") !== false) {
 						preg_match('~%(.*?)%~',$temp[$j],$output);
@@ -277,11 +278,17 @@ for($i=0;$i<count($qusts);$i++){
 					else{
 						$fdbk = "!!!";
 					}
+					$temp[$j] = trim($temp[$j]);
+					$weight = trim($weight);
+					$fdbk = trim($fdbk);
 					$tempAllOptions.=$temp[$j]."@@@";
+					if($weight > 0 || $weight=="!!!"){
+						$correct_Options.=$temp[$j]."@@@";
+					}
 					$tempweight.=$weight."@@@";
 					$tempfeedback.=$fdbk."@@@";
 				}	
-				$correct_ans[$i]=$tempAllOptions;
+				$correct_ans[$i]=$correct_Options;
 				$allOptions[$i]=$tempAllOptions;
 				$feedbacks[$i]=$tempfeedback;
 				$weigths[$i]=$tempweight;
@@ -303,6 +310,7 @@ for($i=0;$i<count($qusts);$i++){
 					</div>';
 					$m++;
 				}
+				$display_string .= '<div>'.$types[$i].'</div>';
 				$display_string .= '<hr></hr>';
 			break;
 		case "Matching":
@@ -428,9 +436,18 @@ for($i=0;$i<count($qusts);$i++){
 				else{
 					$st1 = $answers[$i];
 				}
-				$tempAllOptions=$st1."@@@".$st2."@@@".$st3;
-				$tempweight = $weight;
-				$tempfeedback = $fdbk;
+				$st1 = trim($st1);
+				$st2 = trim($st2);
+				$st3 = trim($st3);
+				$st4 .= $st1."$$";
+				$st5 .= $st2."$$";
+				$st6 .= $st3."$$";
+				$weight = trim($weight);
+				$fdbk = trim($fdbk);
+				$tempAllOptions=$st4."@@@".$st5."@@@".$st6;
+				$tempweight .= $weight."@@@";
+				$tempfeedback .= $fdbk."@@@";
+				
 			}
 			
 			$correct_ans[$i]=$tempAllOptions;
@@ -441,7 +458,7 @@ for($i=0;$i<count($qusts);$i++){
 					<label>'.($i+1).'. '.$qusts[$i].'</label>
 					<input type="text" class="form-control" id=question'.($i+1).' style="width:300px;" value=""></input>
 				</div>';
-			$display_string .= '<div>'.$types[$i].'</div>';
+			//$display_string .= '<div>'.$types[$i].'</div>';
 			/*$display_string .= '<div>'.$correct_ans[$i].'</div>';
 			$display_string .= '<div>'.$allOptions[$i].'</div>';
 			$display_string .= '<div>'.$feedbacks[$i].'</div>';
