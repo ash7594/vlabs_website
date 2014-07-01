@@ -244,14 +244,14 @@
 						fdbk = "---";
 					}else{
 						if(each_ques[i][4] == "!!!"){
-							fdbk = "#No fead back is provided."
+							fdbk = "#No feed back is provided."
 						}else{
 							fdbk = each_ques[i][4];
 						}
 					}
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+each_ques[i][2]+" </b></td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 				
 				case "Multiple":
@@ -285,14 +285,14 @@
 						}
 						
 						if(each_ques[i][4][j+1] == "!!!"){
-							fdbk = "#No fead back is provided."
+							fdbk = "#No feed back is provided."
 						}else{
 							fdbk = each_ques[i][4][j+1];
 						}
 					}					
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+each_ques[i][2]+"</b> </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break
 					
 				case "Multiple_many":
@@ -323,7 +323,7 @@
 									if(each_ques[i][3][l] == options_array[k]){
 										flag += 1;
 										if(each_ques[i][4][l] == "!!!")
-											fdbk += "#No fead back is provided, ";
+											fdbk += "#No feed back is provided, ";
 										else
 											fdbk += each_ques[i][4][l]+", ";
 										break;
@@ -337,7 +337,7 @@
 								for(l=0;l<each_ques[i][3].length-1;l++){
 									if(each_ques[i][3][l] == options_array[k]){
 										if(each_ques[i][4][l] == "!!!")
-											fdbk += "#No fead back is provided, ";
+											fdbk += "#No feed back is provided, ";
 										else
 											fdbk += each_ques[i][4][l]+", ";
 										break;
@@ -368,7 +368,7 @@
 					}					
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+each_ques[i][2]+"</b></td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Matching":
@@ -383,12 +383,17 @@
 							temp_str += temp_str2 + "@@@";
 						//}
 					}
-					if(temp_str == ""){
+					var flag = 0;
+					var options_array = temp_str.split("@@@");
+					for(var m=0; m<options_array.length-1;m++){
+						if(options_array[m] == "...")
+							flag++;
+					}
+					if(flag == options_array.length-1){
 						not_answered++;
 						code_str = not_answer_code;
 						fdbk = "---";
 					}else{
-						var options_array = temp_str.split("@@@");
 						var flag = 0;
 						for(var k=0;k<options_array.length-1;k++){
 							if(each_ques[i][2][1][k] == options_array[k]){
@@ -402,17 +407,17 @@
 							grand_total = grand_total + 100;
 							code_str = correct_code;						
 						}
-						else{						
+						else{			
 							qns_points = 0.0;
 							wrong_qns++;
 							code_str = wrong_code;
 						}
-						fdbk = "#No fead back is provided.";
+						fdbk = "#No feed back is provided.";
 					}
 					
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2][1]+" </td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+each_ques[i][2][1]+"</b></td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Numeric":
@@ -481,7 +486,7 @@
 							}
 						}
 						if(each_ques[i][4][m] == "!!!"){
-							fdbk = "#No fead back is provided."
+							fdbk = "#No feed back is provided."
 						}else{
 							fdbk = each_ques[i][4][m];
 						}
@@ -500,7 +505,7 @@
 					}
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+crt_ans+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+crt_ans+"</b></td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Missing_word":
@@ -533,14 +538,14 @@
 							
 						}
 						if(each_ques[i][4][j] == "!!!"){
-							fdbk = "#No fead back is provided."
+							fdbk = "#No feed back is provided."
 						}else{
 							fdbk = each_ques[i][4][j];
 						}
 					}
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'><b>"+each_ques[i][2]+"</b></td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				default:
