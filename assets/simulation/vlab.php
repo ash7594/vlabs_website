@@ -18,8 +18,7 @@ body{
 
 #canvas{
 	background-color: #FFFFFF;
-	border: 2px solid black;
-	border-radius: 20px;
+	border: 5px solid #444444;
 }
 
 #pics{
@@ -81,6 +80,8 @@ td {
 <button id="stepsim">Step Simulation</button>
 <button id="nextsim" style="display: none">Next Step</button>
 <button id="endstep" style="display: none">End Simulation</button>
+
+<img id="graph_back" src="other/graph1.jpg" style="display: none" />
 
 <div id="pics">
 <font id="csvDisplay" color="#FF0000" style="display: none"></font>
@@ -164,6 +165,8 @@ var nextsim = document.getElementById('nextsim');
 var endstep = document.getElementById('endstep');
 var ghost = document.getElementById('ghost');
 var end_ghost = document.getElementById('end_ghost');
+////
+var graph_back = document.getElementById('graph_back');
 ////
 var message = document.getElementById('message');
 comsim.style.position = "absolute";
@@ -292,6 +295,7 @@ function check_student() {
 function drawcanvas() {
 	if(isGhost != 1)
 		ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	for(var i=0;i<pic_obj.length;i++) {
 		if(pic_obj[i].a == 0) {
 			if(pic_obj[i].id == -2) {
@@ -329,9 +333,11 @@ function drawcanvas() {
 }
 
 function sdrawcanvas() {
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	if(isGhost == 1)
 		ctx.globalAlpha = 0.3;
-	ctx.clearRect(0,0,canvas.width,canvas.height);
+	
 	for(var i=0;i<spic_obj.length;i++) {
 		if(spic_obj[i].a == 0) {
 			if(spic_obj[i].id == -2) {
@@ -657,6 +663,7 @@ function waste() {
 }
 
 function imageCreationListeners() {
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	td_dline.addEventListener("click",function(){drawobj(-3);});
 	td_dtbox.addEventListener("click",function(){drawobj(-2);});
 	td_img1.addEventListener("click",function(){createobj(1);});
@@ -674,6 +681,7 @@ function imageCreationListeners() {
 }
 
 function addAllEventListeners() {
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	gencsv.addEventListener("click",genCSV);
 	loadcsv.addEventListener("click",loadCSV);
 	comsim.addEventListener("click",pre_simulate);

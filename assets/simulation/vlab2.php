@@ -24,8 +24,7 @@ body{
 
 #canvas{
 	background-color: #FFFFFF;
-	border: 2px solid black;
-	border-radius: 20px;
+	border: 5px solid #444444;
 }
 
 #pics{
@@ -87,6 +86,8 @@ td {
 <button id="stepsim">Step Simulation</button>
 <button id="nextsim" style="display: none">Next Step</button>
 <button id="endstep" style="display: none">End Simulation</button>
+
+<img id="graph_back" src="other/graph1.jpg" style="display: none" />
 
 <div id="pics" style="display:none">
 <font id="csvDisplay" color="#FF0000" style="display: none"></font>
@@ -161,6 +162,8 @@ var td_img9 = document.getElementById('td_img9');
 var td_img10 = document.getElementById('td_img10');
 var td_img11 = document.getElementById('td_img11');
 var td_img12 = document.getElementById('td_img12');
+////
+var graph_back = document.getElementById('graph_back');
 ////
 var gencsv = document.getElementById('gencsv');
 var loadcsv = document.getElementById('loadcsv');
@@ -299,6 +302,7 @@ function check_student() {
 function drawcanvas() {
 	if(isGhost != 1)
 		ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	for(var i=0;i<pic_obj.length;i++) {
 		if(pic_obj[i].a == 0) {
 			if(pic_obj[i].id == -2) {
@@ -336,9 +340,10 @@ function drawcanvas() {
 }
 
 function sdrawcanvas() {
+	ctx.clearRect(0,0,canvas.width,canvas.height);
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	if(isGhost == 1)
 		ctx.globalAlpha = 0.3;
-	ctx.clearRect(0,0,canvas.width,canvas.height);
 	for(var i=0;i<spic_obj.length;i++) {
 		if(spic_obj[i].a == 0) {
 			if(spic_obj[i].id == -2) {
@@ -681,6 +686,7 @@ function imageCreationListeners() {
 }
 
 function addAllEventListeners() {
+	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	gencsv.addEventListener("click",genCSV);
 	loadcsv.addEventListener("click",loadCSV);
 	comsim.addEventListener("click",pre_simulate);
@@ -1024,7 +1030,7 @@ function genCSV(){
 	}
 
 function loadCSV(){
-		
+		ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 		init_ajax();
 		if(!xmlHttp){
 			console.log('xmlhttp not working ...');
