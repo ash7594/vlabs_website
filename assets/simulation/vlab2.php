@@ -9,6 +9,8 @@ if(isset($_GET['file'])) {
 <head>
 <!--From ASH rises the WORLD-->	
 <!--Virtual labs 10:00 18 July 2014-->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="../img/akash2.png" type="image/png" sizes="16x16">
 </head>
 
 <style>
@@ -77,15 +79,15 @@ td {
 </div>
 
 <center>
-<font id="message" style="font-size: 20px" color="#0000FF">Begin by clicking an object</font>
+<font id="message" style="font-size: 20px" color="#FFFFFF">Begin by clicking an object</font>
 </center>
 
 <button id="gencsv" style="display:none">Genarate CSV</button>
 <button id="loadcsv" style="display:none">Load CSV</button>
-<button id="comsim">Complete Simulation</button>
-<button id="stepsim">Step Simulation</button>
-<button id="nextsim" style="display: none">Next Step</button>
-<button id="endstep" style="display: none">End Simulation</button>
+<button class="btn btn-warning" id="comsim">Complete Simulation</button>
+<button class="btn btn-success" id="stepsim">Step Simulation</button>
+<button class="btn btn-success" id="nextsim" style="display: none">Next Step</button>
+<button class="btn btn-danger" id="endstep" style="display: none">End Simulation</button>
 
 <img id="graph_back" src="other/graph1.jpg" style="display: none" />
 
@@ -124,8 +126,8 @@ td {
 </div>
 <canvas id="canvas"> 
 </canvas>
-<button id="ghost">Ghost</button>
-<button id="end_ghost">End Ghost</button>
+<button class="btn btn-success" id="ghost">Ghost</button>
+<button class="btn btn-danger" id="end_ghost">End Ghost</button>
 <script>
 
 var change_mode = -1;
@@ -184,18 +186,18 @@ endstep.style.position = "absolute";
 ghost.style.position = "absolute";
 end_ghost.style.position = "absolute";
 
-ghost.style.left = window.innerWidth - 49;
+ghost.style.left = window.innerWidth - 162;
 ghost.style.top = 0;
-end_ghost.style.left = window.innerWidth - 75;
-end_ghost.style.top = 20;
+end_ghost.style.left = window.innerWidth - 95;
+end_ghost.style.top = 0;
 nextsim.style.left = 0;
 nextsim.style.top = 0;
-endstep.style.left = 0;
-endstep.style.top = 20;
+endstep.style.left = 90;
+endstep.style.top = 0;
 comsim.style.left = 0;
 comsim.style.top = 0;
-stepsim.style.left = 0;
-stepsim.style.top = 20;
+stepsim.style.left = 160;
+stepsim.style.top = 0;
 //gencsv.style.left = window.innerWidth - 90;
 //gencsv.style.top = 0;
 //loadcsv.style.left = window.innerWidth - 65;
@@ -720,7 +722,7 @@ function removeAllEventListeners() {
 
 function nextStepSim() {
 	if(ci!=(csv.length-1)) {
-		endstep.removeEventListener("click",endStepSim);
+		nextsim.removeEventListener("click",nextStepSim);
 		simulate(0,0);
 	}	
 }
@@ -737,6 +739,8 @@ function endStepSim() {
 	//loadcsv.style.display = "block";
 	comsim.style.display = "block";
 	stepsim.style.display = "block";
+	ghost.style.display = "block";
+	end_ghost.style.display = "block";
 	isComSim = 1;
 	ci = 0;
 	clearTimeout(simtym);
@@ -772,8 +776,8 @@ function pre_startGhost() {
 
 function startStepSim() {
 	if(csvString != "") {
-		//gencsv.style.display = "none";
-		//loadcsv.style.display = "none";
+		ghost.style.display = "none";
+		end_ghost.style.display = "none";
 		comsim.style.display = "none";
 		stepsim.style.display = "none";
 		nextsim.style.display = "block";
@@ -973,7 +977,7 @@ function simulate(mode,imgIn) {
 		drawcanvas();
 
 	if(mode==0 && isComSim==0) {
-		endstep.addEventListener("click",endStepSim);
+		nextsim.addEventListener("click",nextStepSim);
 		return;
 	} else if(ci!=(csv.length-1)) {
 		if(mode == 0)

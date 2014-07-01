@@ -3,6 +3,8 @@
 <head>
 <!--From ASH rises the WORLD-->	
 <!--Virtual labs 10:00 18 July 2014-->
+<link href="../css/bootstrap.min.css" rel="stylesheet">
+<link rel="icon" href="../img/akash2.png" type="image/png" sizes="16x16">
 </head>
 
 <style>
@@ -71,15 +73,15 @@ td {
 </div>
 
 <center>
-<font id="message" style="font-size: 20px" color="#0000FF">Begin by clicking an object</font>
+<font id="message" style="font-size: 20px" color="#FFFFFF">Begin by clicking an object</font>
 </center>
 
-<button id="gencsv">Genarate CSV</button>
+<button class="btn btn-primary" id="gencsv">Genarate CSV</button>
 <button id="loadcsv" style="display:none">Load CSV</button>
-<button id="comsim">Complete Simulation</button>
-<button id="stepsim">Step Simulation</button>
-<button id="nextsim" style="display: none">Next Step</button>
-<button id="endstep" style="display: none">End Simulation</button>
+<button class="btn btn-warning" id="comsim">Complete Simulation</button>
+<button class="btn btn-success" id="stepsim">Step Simulation</button>
+<button class="btn btn-success" id="nextsim" style="display: none">Next Step</button>
+<button class="btn btn-danger" id="endstep" style="display: none">End Simulation</button>
 
 <img id="graph_back" src="other/graph1.jpg" style="display: none" />
 
@@ -99,20 +101,20 @@ td {
 		<td id="td_img4" width="100" height="100"><img id="img4" src="images/img4.png" height="100px" width="100px" /></td>
 	</tr>
 	<tr>
-		<td id="td_img5" width="100" height="100"><img id="img5" src="images/img1.png" height="100px" width="100px" /></td>
-		<td id="td_img6" width="100" height="100"><img id="img6" src="images/img2.png" height="100px" width="100px" /></td>
+		<td id="td_img5" width="100" height="100"><img id="img5" src="images/img5.png" height="100px" width="100px" /></td>
+		<td id="td_img6" width="100" height="100"><img id="img6" src="images/img6.png" height="100px" width="100px" /></td>
 	</tr>
 	<tr> 
-		<td id="td_img7" width="100" height="100"><img id="img7" src="images/img3.png" height="100px" width="100px" /></td>
-		<td id="td_img8" width="100" height="100"><img id="img8" src="images/img4.png" height="100px" width="100px" /></td>
+		<td id="td_img7" width="100" height="100"><img id="img7" src="images/img7.png" height="100px" width="100px" /></td>
+		<td id="td_img8" width="100" height="100"><img id="img8" src="images/img8.png" height="100px" width="100px" /></td>
 	</tr>
 	<tr>
-		<td id="td_img9" width="100" height="100"><img id="img9" src="images/img1.png" height="100px" width="100px" /></td>
-		<td id="td_img10" width="100" height="100"><img id="img10" src="images/img2.png" height="100px" width="100px" /></td>
+		<td id="td_img9" width="100" height="100"><img id="img9" src="images/img9.png" height="100px" width="100px" /></td>
+		<td id="td_img10" width="100" height="100"><img id="img10" src="images/img10.png" height="100px" width="100px" /></td>
 	</tr>
 	<tr> 
-		<td id="td_img11" width="100" height="100"><img id="img11" src="images/img3.png" height="100px" width="100px" /></td>
-		<td id="td_img12" width="100" height="100"><img id="img12" src="images/img4.png" height="100px" width="100px" /></td>
+		<td id="td_img11" width="100" height="100"><img id="img11" src="images/img11.png" height="100px" width="100px" /></td>
+		<td id="td_img12" width="100" height="100"><img id="img12" src="images/img12.png" height="100px" width="100px" /></td>
 	</tr>	
 </table>
 </div>
@@ -182,16 +184,18 @@ ghost.style.left = 0;
 ghost.style.top = window.innerHeight-40;
 end_ghost.style.left = 0;
 end_ghost.style.top = window.innerHeight-20;
+
 nextsim.style.left = 0;
 nextsim.style.top = 0;
-endstep.style.left = 0;
-endstep.style.top = 20;
+endstep.style.left = 90;
+endstep.style.top = 0;
 comsim.style.left = 0;
 comsim.style.top = 0;
-stepsim.style.left = 0;
-stepsim.style.top = 20;
-gencsv.style.left = window.innerWidth - 90;
+stepsim.style.left = 160;
+stepsim.style.top = 0;
+gencsv.style.left = window.innerWidth - 125;
 gencsv.style.top = 0;
+
 loadcsv.style.left = window.innerWidth - 65;
 loadcsv.style.top = 20;
 
@@ -212,7 +216,7 @@ canvas.width = window.innerWidth*0.8;
 canvas.height = window.innerHeight*0.85;
 canvas.style.position = "absolute";
 
-picTable.style.height = canvas.height;
+picTable.style.height = canvas.height + 10;
 picTable.style.width = 226;
 var offsetX = (window.innerWidth - canvas.width - 226)/2;
 var offsetY = (window.innerHeight - canvas.height)/2;
@@ -709,7 +713,7 @@ function removeAllEventListeners() {
 
 function nextStepSim() {
 	if(ci!=(csv.length-1)) {
-		endstep.removeEventListener("click",endStepSim);
+		nextsim.removeEventListener("click",nextStepSim);
 		simulate(0,0);
 	}	
 }
@@ -958,7 +962,7 @@ function simulate(mode,imgIn) {
 		drawcanvas();
 
 	if(mode==0 && isComSim==0) {
-		endstep.addEventListener("click",endStepSim);
+		nextsim.addEventListener("click",nextStepSim);
 		return;
 	} else if(ci!=(csv.length-1)) {
 		if(mode == 0)
@@ -1089,8 +1093,8 @@ function loadCSV(){
 				}
 				else{
 					//alert(Username+ '  '+specification);
-					increment();
-					updateSignIn();
+					//increment();
+					//updateSignIn();
 				}
 			} else {
 				alert("Sorry, your browser does not support Web Storage...");
