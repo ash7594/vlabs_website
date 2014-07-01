@@ -194,8 +194,9 @@
 			}
 		}
 		
-		alert("added");
+		alert("quiz submited");
 		var correct_code = '<small style="color:green;">Correct</small>';
+		var partial_correct_code = '<small style="color:orange;">Partially Correct</small>';
 		var wrong_code = '<small style="color:red;">Wrong</small>';
 		var not_answer_code = '<small style="color:blue;">Not Answered</small>';
 		var correct_qns = 0;
@@ -306,34 +307,68 @@
 							temp_str += temp_str2 + "@@@";
 						}
 					}
-					
+					var options_array = temp_str.split("@@@");
 					if(temp_str == ""){
 						not_answered++;
 						code_str = not_answer_code;
 						fdbk = "---";
 					}else{
-						/*if(each_ques[i][2] == temp_str){
+						var temp_points = 0;
+						var fdbk = "";
+						var l;
+						var flag = 0;
+						for(var k=0;k<options_array.length-1;k++){
+							if(isInArray(each_ques[i][2],options_array[k])){
+								for(l=0;l<each_ques[i][3].length-1;l++){
+									if(each_ques[i][3][l] == options_array[k]){
+										flag += 1;
+										if(each_ques[i][4][l] == "!!!")
+											fdbk += "#No fead back is provided, ";
+										else
+											fdbk += each_ques[i][4][l]+", ";
+										break;
+									}				
+								}
+								if(each_ques[i][5][l] == "!!!"){
+									each_ques[i][5][l] = 0;
+								}
+								temp_points += parseFloat(each_ques[i][5][l]);
+							}else{
+								for(l=0;l<each_ques[i][3].length-1;l++){
+									if(each_ques[i][3][l] == options_array[k]){
+										if(each_ques[i][4][l] == "!!!")
+											fdbk += "#No fead back is provided, ";
+										else
+											fdbk += each_ques[i][4][l]+", ";
+										break;
+									}				
+								}
+								if(each_ques[i][5][l] == "!!!"){
+									//alert(each_ques[i][5][l]);
+									each_ques[i][5][l] = -50;
+								}
+								temp_points += parseFloat(each_ques[i][5][l]);
+							}
+						}
 						
+						if(options_array.length-1 == flag){
 							qns_points = 100.0;
 							correct_qns++;
-							grand_total = grand_total + 100;
-							code_str = correct_code;						
-						}
-						else{						
-							qns_points = 0.0;
+							code_str = correct_code;	
+						}else if(flag == 0){
+							qns_points = temp_points;
 							wrong_qns++;
 							code_str = wrong_code;
+						}else{						
+							qns_points = temp_points;
+							partial_correct_qns++;
+							code_str = partial_correct_code;
 						}
-						
-						if(each_ques[i][4][j+1] == "!!!"){
-							fdbk = "#No fead back is provided."
-						}else{
-							fdbk = each_ques[i][4][j+1];
-						}*/
+						grand_total = grand_total + qns_points;
 					}					
 					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+temp_str+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2]+" </td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Matching":
@@ -348,8 +383,36 @@
 							temp_str += temp_str2 + "@@@";
 						//}
 					}
+					if(temp_str == ""){
+						not_answered++;
+						code_str = not_answer_code;
+						fdbk = "---";
+					}else{
+						var options_array = temp_str.split("@@@");
+						var flag = 0;
+						for(var k=0;k<options_array.length-1;k++){
+							if(each_ques[i][2][1][k] == options_array[k]){
+								flag++;
+							}
+						}
+						
+						if(options_array.length-1 == flag){
+							qns_points = 100.0;
+							correct_qns++;
+							grand_total = grand_total + 100;
+							code_str = correct_code;						
+						}
+						else{						
+							qns_points = 0.0;
+							wrong_qns++;
+							code_str = wrong_code;
+						}
+						fdbk = "#No fead back is provided.";
+					}
+					
+					
 					user_ans.push(temp_str);
-					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; <small>Correct</small></th><th style='text-align:right; padding-right:2%;'> 100.0 pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td style='color:green;'>True Ans </td><td style='text-align:right; padding-right:2%;'>Your Ans </td></tr>";
+					summary += "<tr class='info'><th>Question "+(i+1)+" &raquo; "+code_str+"</th><th style='text-align:right; padding-right:2%;'> "+qns_points/100+" pt </th></tr><tr><td colspan='2'>"+each_ques[i][1]+"</td></tr><tr><td>Correct Answers: </td><td style='text-align:right; padding-right:2%;'>Your Answers:</td></tr><tr><td style='color:green;'>"+each_ques[i][2][1]+" </td><td style='text-align:right; padding-right:2%;'>"+options_array+"</td></tr><tr><td>Feedback: </td><td style='text-align:right; padding-right:2%; color:blue'>"+fdbk+"</td></tr>";
 					break;
 					
 				case "Numeric":
@@ -363,11 +426,11 @@
 						fdbk = "---";
 					}else{
 						var temp = 0;
-						temp_str = parseInt(temp_str);
+						temp_str = parseFloat(temp_str);
 						for(var m=0; m<each_ques[i][2][1].length-1;m++){
 							if(each_ques[i][2][1][m] != "!!!"){
 								//alert(each_ques[i][2][0][m]+" "+each_ques[i][2][1][m]);
-								if(temp_str >= (parseInt(each_ques[i][2][0][m])-parseInt(each_ques[i][2][1][m])) && temp_str <= (parseInt(each_ques[i][2][0][m])+parseInt(each_ques[i][2][1][m]))){
+								if(temp_str >= (parseFloat(each_ques[i][2][0][m])-parseFloat(each_ques[i][2][1][m])) && temp_str <= (parseFloat(each_ques[i][2][0][m])+parseFloat(each_ques[i][2][1][m]))){
 									temp=1;
 									break;
 								}else{
@@ -375,8 +438,8 @@
 								}
 							}
 							else if(each_ques[i][2][2][m] != "!!!"){
-								alert("done_elseif");
-								if(temp_str >= parseInt(each_ques[i][2][0][m]) && temp_str <= parseInt(each_ques[i][2][2][m])){
+								//alert("done_elseif");
+								if(temp_str >= parseFloat(each_ques[i][2][0][m]) && temp_str <= parseFloat(each_ques[i][2][2][m])){
 									temp=1;
 									break;
 								}else{
@@ -384,7 +447,7 @@
 								}
 							}
 							else{
-								alert("done_else");
+								//alert("done_else");
 								if(each_ques[i][2][0][m] == temp_str){
 									temp = 1;
 									break;
@@ -400,8 +463,8 @@
 								qns_points = 100.0;
 							}
 							else{
-								grand_total = grand_total + parseInt(each_ques[i][5][m]);
-								qns_points = parseInt(each_ques[i][5][m]);
+								grand_total = grand_total + parseFloat(each_ques[i][5][m]);
+								qns_points = parseFloat(each_ques[i][5][m]);
 							}
 							code_str = correct_code;								
 						}else{

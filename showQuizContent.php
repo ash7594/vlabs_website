@@ -282,7 +282,7 @@ for($i=0;$i<count($qusts);$i++){
 					$weight = trim($weight);
 					$fdbk = trim($fdbk);
 					$tempAllOptions.=$temp[$j]."@@@";
-					if($weight > 0 || $weight=="!!!"){
+					if($weight > 0){
 						$correct_Options.=$temp[$j]."@@@";
 					}
 					$tempweight.=$weight."@@@";
@@ -315,8 +315,8 @@ for($i=0;$i<count($qusts);$i++){
 			break;
 		case "Matching":
 				$temp = explode("=",$answers[$i]);
-				$temp2= array();
-				$temp3= array();
+				$temp2= array(count($temp)-1);
+				$temp3= array(count($temp)-1);
 				$st1="";
 				$st2="";
 				$st3="";
@@ -328,23 +328,30 @@ for($i=0;$i<count($qusts);$i++){
 				$option = '<option value="...">...</option>';
 				while($m<count($temp)){
 					$temp4 = explode("->",$temp[$m]);
-					$temp2[$m] = $temp4[0];
-					$temp2[$m] = trim($temp2[$m]);
-					$temp3[$m] = $temp4[1];
-					$temp3[$m] = trim($temp3[$m]);
+					$temp2[$m-1] = $temp4[0];
+					$temp2[$m-1] = trim($temp2[$m-1]);
+					$temp3[$m-1] = $temp4[1];
+					$temp3[$m-1] = trim($temp3[$m-1]);
+					$st1 .= $temp2[$m-1]."$$";
+					$st2 .= $temp3[$m-1]."$$";
+					$m++;
+				}
+
+				shuffle($temp3);
+				$m=0;
+				while($m<count($temp3)){
 					$select_value = str_replace(" ","####",$temp3[$m]);
-					$st1 .= $temp4[0]."$$";
-					$st2 .= $temp4[1]."$$";
 					$option .= '<option value='.$select_value.'>'.$temp3[$m].'</option>';
 					$m++;
 				}
+				
 				$st3 = $st1."@@@".$st2;
 				$correct_ans[$i]=$st3;
 				$allOptions[$i]=$st3;
-				$feedbacks[$i]="!!!";
-				$weigths[$i]="!!!";
-				$m=1;
-				while($m<=count($temp2)){
+				$feedbacks[$i]="!!!@@@";
+				$weigths[$i]="!!!@@@";
+				$m=0;
+				while($m<count($temp2)){
 					$display_string .= '<div class="row"><div class="col-xs-6 col-md-4">'.$temp2[$m].'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;------></div><div class="col-xs-6 col-md-4"><select id=subject_name'.$m.' name=question'.($i+1).' class="form-control" style="width:300px;">'.$option.'</select></div></div>';
 					$m++;
 				}
