@@ -163,7 +163,7 @@ var td_img10 = document.getElementById('td_img10');
 var td_img11 = document.getElementById('td_img11');
 var td_img12 = document.getElementById('td_img12');
 ////
-var graph_back = document.getElementById('graph_back');
+//var graph_back = document.getElementById('graph_back');
 ////
 var gencsv = document.getElementById('gencsv');
 var loadcsv = document.getElementById('loadcsv');
@@ -302,7 +302,7 @@ function check_student() {
 function drawcanvas() {
 	if(isGhost != 1)
 		ctx.clearRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
+	//ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	for(var i=0;i<pic_obj.length;i++) {
 		if(pic_obj[i].a == 0) {
 			if(pic_obj[i].id == -2) {
@@ -341,7 +341,7 @@ function drawcanvas() {
 
 function sdrawcanvas() {
 	ctx.clearRect(0,0,canvas.width,canvas.height);
-	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
+	//ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	if(isGhost == 1)
 		ctx.globalAlpha = 0.3;
 	for(var i=0;i<spic_obj.length;i++) {
@@ -394,8 +394,10 @@ function finish_transform() {
 			pic_obj[current_img].x = spic_obj[current_img].x;
 			pic_obj[current_img].y = spic_obj[current_img].y;
 			ci2+=1;
-			if(ci2<csv2.length-1)
+			if(ci2<csv2.length-1) {
+				removeAllEventListeners();
 				simulate(0,0);
+			}	
 			else
 				endGhostMode();
 		} else {
@@ -415,8 +417,10 @@ function finish_transform() {
 			pic_obj[current_img].fw = spic_obj[current_img].fw;
 			pic_obj[current_img].fh = spic_obj[current_img].fh;
 			ci2+=1;
-			if(ci2<csv2.length-1)
+			if(ci2<csv2.length-1) {
+				removeAllEventListeners();
 				simulate(0,0);
+			}	
 			else
 				endGhostMode();
 		} else {
@@ -432,8 +436,10 @@ function finish_transform() {
 		if(check_student()==1) {
 			pic_obj[current_img].a = spic_obj[current_img].a;
 			ci2+=1;
-			if(ci2<csv2.length-1)
+			if(ci2<csv2.length-1) {
+				removeAllEventListeners();
 				simulate(0,0);
+			}	
 			else
 				endGhostMode();
 		} else {
@@ -686,7 +692,7 @@ function imageCreationListeners() {
 }
 
 function addAllEventListeners() {
-	ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
+	//ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 	gencsv.addEventListener("click",genCSV);
 	loadcsv.addEventListener("click",loadCSV);
 	comsim.addEventListener("click",pre_simulate);
@@ -750,7 +756,7 @@ function ghostmode() {
 
 function endGhostMode() {
 	isGhost = 0;
-	pic_obj = [];
+	//pic_obj = [];
 	//removeAllEventListeners();
 	comsim.style.display = "block";
 	stepsim.style.display = "block";
@@ -1030,7 +1036,7 @@ function genCSV(){
 	}
 
 function loadCSV(){
-		ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
+		//ctx.drawImage(graph_back,0,0,canvas.width,canvas.height);
 		init_ajax();
 		if(!xmlHttp){
 			console.log('xmlhttp not working ...');
