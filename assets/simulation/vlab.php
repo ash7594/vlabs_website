@@ -817,7 +817,7 @@ function endStepSim() {
 	nextsim.style.display = "none";
 	endstep.style.display = "none";
 	gencsv.style.display = "block";
-	loadcsv.style.display = "block";
+	//loadcsv.style.display = "block";
 	comsim.style.display = "block";
 	stepsim.style.display = "block";
 	isComSim = 1;
@@ -1068,7 +1068,7 @@ function simulate(mode,imgIn) {
 		nextsim.style.display = "none";
 		endstep.style.display = "none";
 		gencsv.style.display = "block";
-		loadcsv.style.display = "block";
+		//loadcsv.style.display = "block";
 		comsim.style.display = "block";
 		stepsim.style.display = "block";
 		isComSim = 1;
