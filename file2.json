@@ -11,6 +11,12 @@
 		"thumb" : "akash3.png"
 		},
 		{
+		"name" : "Ohms Law",
+		"exp_no" : "6",
+		"description" : "This is the experiment which explains the proposionality relation of the voltage and current.",
+		"thumb" : "ohms law.png"
+		},
+		{
 		"name" : "Force required to move a wooden block",
 		"exp_no" : "3",
 		"description" : "To establish relationship between weight of a rectangular wooden block lying on a horizontal table and the minimum force required to just move it using a spring balance.",
