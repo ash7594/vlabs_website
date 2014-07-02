@@ -5,6 +5,12 @@
 	"subject_name" : "physics",
 	"exps" : [
 		{
+		"name" : "testing",
+		"exp_no" : "7",
+		"description" : "des",
+		"thumb" : "akash5.png"
+		},
+		{
 		"name" : "test1",
 		"exp_no" : "5",
 		"description" : "des",
