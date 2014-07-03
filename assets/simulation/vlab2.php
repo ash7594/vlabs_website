@@ -89,8 +89,6 @@ td {
 <button class="btn btn-success" id="nextsim" style="display: none">Next Step</button>
 <button class="btn btn-danger" id="endstep" style="display: none">End Simulation</button>
 
-<img id="graph_back" src="other/graph1.jpg" style="display: none" />
-
 <div id="pics" style="display:none">
 <font id="csvDisplay" color="#FF0000" style="display: none"></font>
 <table id="picTable" width="200" border="2">
